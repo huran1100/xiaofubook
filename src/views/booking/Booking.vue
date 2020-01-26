@@ -10,6 +10,7 @@
         <van-cell-group>
             <van-field v-model="remark" placeholder="备注" />
         </van-cell-group>
+        <van-uploader :after-read="afterRead" />
 
         <van-number-keyboard
                 :show="show"
@@ -55,6 +56,10 @@
             },
             onDelete() {
                 this.money = this.money.substr(0,this.money.length-1)
+            },
+            afterRead(file) {
+                // 此时可以自行将文件上传至服务器
+                console.log(file);
             }
         }
 

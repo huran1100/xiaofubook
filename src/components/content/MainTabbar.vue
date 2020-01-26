@@ -3,15 +3,15 @@
         <Tabbar>
             <TabbarItem path="/bill">
                 <img slot="icon" src="~assets/img/tabbar/home.svg">
-                <div slot="text">账本</div>
+                <div slot="ttext">账本</div>
             </TabbarItem>
             <TabbarItem path="/booking">
                 <img slot="icon" src="~assets/img/tabbar/category.svg">
-                <div slot="text">记账</div>
+                <div slot="ttext">记账</div>
             </TabbarItem>
             <TabbarItem path="/user">
                 <img slot="icon" src="~assets/img/tabbar/profile.svg">
-                <div slot="text">我的</div>
+                <div slot="ttext">我的</div>
             </TabbarItem>
         </Tabbar>
     </div>

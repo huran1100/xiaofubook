@@ -1,7 +1,7 @@
 <template>
     <div class="tabbar-item" @click="swich">
         <div><slot name="icon"><img :src="imgurl"></slot></div>
-        <div><slot name="text">{{text}}</slot></div>
+        <div><slot name="ttext">{{ttext}}</slot></div>
     </div>
 
 </template>
@@ -11,7 +11,7 @@
         name: "TabbarItem",
         props:{
             path:String,
-            text: {
+            ttext: {
                 type:String,
                 default:'用户'
             }
