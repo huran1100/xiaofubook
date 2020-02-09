@@ -1,30 +1,30 @@
 <template>
     <div>
-        <Tabbar>
-            <TabbarItem path="/bill">
-                <img slot="icon" src="~assets/img/tabbar/home.svg">
-                <div slot="ttext">账本</div>
-            </TabbarItem>
-            <TabbarItem path="/booking">
-                <img slot="icon" src="~assets/img/tabbar/category.svg">
-                <div slot="ttext">记账</div>
-            </TabbarItem>
-            <TabbarItem path="/user">
-                <img slot="icon" src="~assets/img/tabbar/profile.svg">
-                <div slot="ttext">我的</div>
-            </TabbarItem>
-        </Tabbar>
+        <van-tabbar v-model="active">
+            <van-tabbar-item  replace to="/bill" icon="balance-list-o">账单</van-tabbar-item>
+            <van-tabbar-item  replace to="/booking" icon="add-o">记账</van-tabbar-item>
+            <van-tabbar-item  replace to="/account" icon="debit-pay">账本</van-tabbar-item>
+            <van-tabbar-item  replace to="/user" icon="user-circle-o">我的</van-tabbar-item>
+        </van-tabbar>
     </div>
 </template>
 
 <script>
-    import Tabbar from 'components/common/tabbar/Tabbar'
-    import TabbarItem from 'components/common/tabbar/TabbarItem'
+
+    import { Tabbar, TabbarItem } from 'vant';
     export default {
         name: "",
+        data() {
+            return {
+                active: 1
+            }
+        },
         components :{
-            Tabbar,
-            TabbarItem
+            [Tabbar.name]:Tabbar,
+            [TabbarItem.name]:TabbarItem
+        },
+        methods:{
+
         }
     }
 </script>

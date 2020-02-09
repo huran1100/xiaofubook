@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<!--<form name="a" id="a" action="#" method="post">-->
+<!--    <input type="radio" name="num1" id="username" value="1" checked> 用户名1-->
+<!--    <input type="radio" name="num1" id="passwd" value="2"> 用户名2-->
+<!--    <input type="button" value="提交" οnclick="click1()" />-->
+<!--</form>-->
+<!--float:left;width:49%;-->
+<!--<div class="test_temp" style="width:50%; height: 500px; display: inline">hehe</div>-->
+<!--<div class="test_temp" style="width:50%; height: 500px; display: inline">hehe</div>-->
+<!--<div class="test_temp" style="width:50%; height: 500px; display: inline">hehe</div>-->
+<div class="test_temp" style="width:50%; height: 500px; float:left;">hehe</div>
+<div class="test_temp" style="width:50%; height: 500px; float:left;">
+    <div class="test_temp" style="width:50%; height: 200px; float:left;">hehe</div>
+    <div class="test_temp" style="width:50%; height: 200px; float:left;">hehe</div>
+
+</div>
+
+</body>
+
+<script>
+    function get_single_checked_val (name) {
+        var radio=document.getElementsByName(name);
+        var selectvalue=null;   //  selectvalue为radio中选中的值
+        for(var i=0;i<radio.length;i++){
+            if(radio[i].checked==true) {
+                selectvalue=radio[i].value;
+                break;
+            }
+        }
+        return selectvalue
+
+    }
+    function click1(){
+        var select_val1 = get_single_checked_val("num1")
+        console.log('select_val1 = ', select_val1)
+    }
+</script>
+</html>

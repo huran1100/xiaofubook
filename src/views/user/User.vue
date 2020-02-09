@@ -9,12 +9,12 @@
                         src="https://img.yzcdn.cn/vant/cat.jpeg"
                 />
             </div>
-            <div class="user-item">多多</div>
+            <div class="user-item">{{this.$store.state.currentUser.nikename}}</div>
         </div>
         <div class="user-links">
-            <div class="links-item">
+            <div class="links-item" @click="jump()">
                 <van-icon name="pending-payment" />
-                <div>账本</div>
+                <div>添加账本</div>
             </div>
             <div class="links-item">
                 <van-icon name="records" />
@@ -38,13 +38,17 @@
 </template>
 
 <script>
-    import {Image,Row, Col} from 'vant';
+    import {Row, Col} from 'vant';
     export default {
         name: "",
         components:{
-            [Image.name]:Image,
             [Row.name]: Row,
             [Col.name]: Col,
+        },
+        methods:{
+            jump() {
+                this.$router.push('/addAccount')
+            }
         }
     }
 </script>
@@ -54,7 +58,7 @@
         width: 100%;
         height: 50%;
         display: block;
-        background-color: slategray;
+        background-color: honeydew;
     }
     .user-item{
         text-align: center;

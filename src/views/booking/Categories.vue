@@ -1,25 +1,40 @@
 <template>
     <div class="category">
-        <ul>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-            <li>呵呵哒</li>
-        </ul>
+        <div :class="{active:currentIndex == index}"  class="category-item"
+             v-for="(item,index) in category" @click = "selectCategory(index,item.id)">
 
+            <van-icon :name="item.icon" />
+            <div>{{item.name}}</div>
+        </div>
     </div>
 </template>
 
 <script>
+    import {getCategory} from 'network/booking'
     export default {
-        name: ""
+        name: "",
+        data() {
+            return {
+                category:[{
+                    id:'',
+                    icon: '',
+                    name:''
+                }],
+                currentIndex:0
+            }
+        },
+        mounted:function () {
+            getCategory(this.$store.state.currentUser.id).then(res =>{
+                this.category = res.data.data
+            })
+        },
+        methods:{
+            selectCategory(index,categoryId){
+                this.currentIndex = index
+                this.$emit('sendCategory',categoryId)
+            }
+
+        }
     }
 </script>
 
@@ -27,9 +42,22 @@
     .category{
         height: 100px;
         width: 100%;
-        background-color: aquamarine;
-        overflow-y: scroll;
 
+        overflow-y: scroll;
+        border: 1px solid;
+
+
+    }
+    .category-item{
+        width: 15vw;
+        height: 8vh;
+        margin: 1%;
+        float: left;
+        display: block;
+        text-align: center;
+    }
+    .active{
+        background-color: beige;
     }
 
 </style>

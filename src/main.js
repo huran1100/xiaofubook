@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 import { Button,NavBar,Icon,Toast,Field,CellGroup,NumberKeyboard,Uploader,Cell,DatetimePicker,
-    Popup} from 'vant';
+    Popup,Image,Picker,List } from 'vant';
 
 Vue.use(Button);
 Vue.use(NavBar);
@@ -17,6 +17,11 @@ Vue.use(NumberKeyboard);
 Vue.use(Uploader);
 Vue.use(DatetimePicker);
 Vue.use(Popup);
+Vue.use(Image);
+Vue.use(Picker);
+Vue.use(List);
+
+
 
 Vue.config.productionTip = false
 
