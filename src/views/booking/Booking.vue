@@ -135,7 +135,6 @@
 
             },
             onInput(value) {
-                this.$toast(value);
                 this.money+=value
             },
             onDelete() {
@@ -161,7 +160,9 @@
                 let accountId = this.$store.state.currentUser.currentAccountId
                 booking(this.spendTime,userId,this.spendUser.id,accountId,
                     this.type,this.cateogryId,this.money,this.picture,this.remark).then(res => {
-                        this.$toast(res.data.msg)
+                        if(res.data.status == 0){
+                            this.$toast("添加成功")
+                        }
                 })
                 this.show = false
             },

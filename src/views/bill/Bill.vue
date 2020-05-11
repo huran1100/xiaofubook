@@ -1,6 +1,8 @@
 <template>
     <div>
-        <van-nav-bar title="账单" ></van-nav-bar>
+        <van-nav-bar title="账单" >
+            <van-icon @click="toBooking" name="add-o" slot="right" size="30px"/>
+        </van-nav-bar>
 
         <van-cell title="日期" :value="showDate" is-link arrow-direction="down"  @click="showPopup"></van-cell>
 
@@ -29,6 +31,7 @@
         >
         <div v-for="item in dataList">
             <span>{{item.day|formatDate}}</span>
+
             <van-cell v-for="info in item.billList"
                       :icon="info.icon"  center
                       :title="info.name"
@@ -47,8 +50,8 @@
         name: "",
         data() {
             return {
-                minDate: new Date(2020, 0, 1),
-                maxDate: new Date(2025, 10, 1),
+                minDate: new Date(2000, 0, 1),
+                maxDate: new Date(2050, 10, 1),
                 currentDate: new Date(),
                 showDate:formatTimeToStr(new Date(),'yyyy-MM'),
                 show: false,
@@ -63,10 +66,17 @@
                 if(time!=null&&time!="")
                 {
                     let date = new Date(time);
+
                     return formatTimeToStr(date, "yyyy-MM-dd");
+                    //return date;
                 }else{
                     return "";
                 }
+            },
+            iosDate(time){
+
+                return time.replace(/\-/g, "/");
+
             }
         },
         methods:{
@@ -77,6 +87,9 @@
                     return `${val}月`
                 }
                 return val;
+            },
+            toBooking() {
+                this.$router.replace('/booking')
             },
             dateFor(time){
                 if(time!=null&&time!="")
@@ -92,8 +105,13 @@
             },
             getList(){
                 getBillList(this.$store.state.currentUser.currentAccountId,this.showDate,10).then(res=>{
-                    console.log(res.data.data)
-                    this.dataList = res.data.data.list
+                    //console.log(res.data.data)
+
+                    if(res.data.status == 1){
+                        this.dataList = []
+                    }else{
+                        this.dataList = res.data.data.list
+                    }
 
 
 

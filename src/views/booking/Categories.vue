@@ -3,7 +3,7 @@
         <div :class="{active:currentIndex == index}"  class="category-item"
              v-for="(item,index) in category" @click = "selectCategory(index,item.id)">
 
-            <van-icon :name="item.icon" />
+            <van-icon :name="item.icon" size="20px"/>
             <div>{{item.name}}</div>
         </div>
     </div>
@@ -40,11 +40,11 @@
 
 <style scoped>
     .category{
-        height: 100px;
+        height: 130px;
         width: 100%;
 
         overflow-y: scroll;
-        border: 1px solid;
+
 
 
     }

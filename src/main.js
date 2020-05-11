@@ -3,8 +3,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
+
 import { Button,NavBar,Icon,Toast,Field,CellGroup,NumberKeyboard,Uploader,Cell,DatetimePicker,
     Popup,Image,Picker,List } from 'vant';
+
 
 Vue.use(Button);
 Vue.use(NavBar);
@@ -24,6 +26,7 @@ Vue.use(List);
 
 
 Vue.config.productionTip = false
+
 
 new Vue({
   router,

@@ -10,7 +10,8 @@ export default new Vuex.Store({
       nikename: "1",
       username: "1",
       email: "1",
-      currentAccountId: 1
+      picture:'https://img.yzcdn.cn/vant/cat.jpeg',
+      currentAccountId: 0
     },
     login:false,
     token:''

@@ -6,7 +6,7 @@
                         round
                         width="7rem"
                         height="7rem"
-                        src="https://img.yzcdn.cn/vant/cat.jpeg"
+                        :src="this.$store.state.currentUser.picture"
                 />
             </div>
             <div class="user-item">{{this.$store.state.currentUser.nikename}}</div>

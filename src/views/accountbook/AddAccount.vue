@@ -8,16 +8,17 @@
                      fixed />
         <div class="add-account-content">
             <van-cell-group>
-                <van-field v-model="name" placeholder="请输入账本名称" />
+                <van-field v-model="name" placeholder="请输入账本名称或邀请码" />
             </van-cell-group>
-            <van-button type="info" @click="add">确认</van-button>
+            <van-button type="info" @click="add">创建账本</van-button>
+            <van-button type="info" @click="join">加入账本</van-button>
         </div>
 
     </div>
 </template>
 
 <script>
-    import {addAccount} from 'network/account'
+    import {addAccount,joinAccount} from 'network/account'
     export default {
         name: "addAccount",
         data() {
@@ -32,9 +33,15 @@
             add() {
                 addAccount(this.$store.state.currentUser.id,this.name).then(res => {
                     this.$toast(res.data.msg)
-
+                    if (res.data.status == 0) {
+                        this.$store.state.currentUser.currentAccountId = res.data.data
+                    }
                 })
-
+            },
+            join() {
+                joinAccount(this.name).then(res => {
+                    this.$toast(res.data.msg)
+                })
             }
         }
     }

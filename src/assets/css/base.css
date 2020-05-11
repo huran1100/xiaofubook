@@ -27,7 +27,6 @@ body {
   /* rem vw/vh */
   width: 100vw;
   height: 100vh;
-  border: 1px solid;
 }
 
 a {

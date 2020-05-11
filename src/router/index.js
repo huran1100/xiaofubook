@@ -31,7 +31,7 @@ const routes = [
     children:[
       {
         path: '',
-        redirect: '/booking'
+        redirect: '/bill'
       },
       {
         path: '/booking',
@@ -90,15 +90,19 @@ router.beforeEach((to, from, next) => {
   }else{
     next()
   }*/
-
  if(to.path=='/login') return next()
-
   const  tokenStr = window.sessionStorage.getItem('token')
-
   if(!tokenStr) return next('/login')
-
   next()
 
-
+  /*if(to.path !='/addAccount'){
+    if(this.$store.state.currentUser.currentAccountId == 0){
+      console.log(this.$store.state.currentUser.currentAccountId,"dangq==")
+      return next('/addAccount')
+    }else{
+      next()
+    }
+  }*/
 })
+
 export default router

@@ -3,6 +3,9 @@
 // 年(y)可以用 1-4 个占位符，毫秒(S)只能用 1 个占位符(是 1-3 位的数字)
 // (new Date()).Format("yyyy-MM-dd hh:mm:ss.S") ==> 2006-07-02 08:09:04.423
 // (new Date()).Format("yyyy-M-d h:m:s.S")      ==> 2006-7-2 8:9:4.18
+
+
+
 Date.prototype.Format = function (fmt) {
     var o = {
         "M+": this.getMonth() + 1,                 //月份
@@ -27,4 +30,15 @@ export function formatTimeToStr(times, pattern) {
         d = new Date(times).Format(pattern);
     }
     return d.toLocaleString();
+}
+
+export function formattingDate (timedata) {
+    var date = new Date(timedata.toString().replace(/-/g, '/'));
+    var Year = date.getFullYear();
+    var Month = date.getMonth() + 1 < 10 ? "0"+(date.getMonth()+1) : date.getMonth()+1;
+    var d = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    var Hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var Minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    var Seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return (Year + "-" + Month + "-" + d + " " + Hours + ":" + Minutes + ":" + Seconds);
 }
