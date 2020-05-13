@@ -6,6 +6,7 @@
             <van-tabbar-item  replace to="/user" icon="user-circle-o">我的</van-tabbar-item>
         </van-tabbar>
 
+
     </div>
 </template>
 
