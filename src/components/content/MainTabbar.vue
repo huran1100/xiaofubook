@@ -5,8 +5,6 @@
             <van-tabbar-item  replace to="/account" icon="debit-pay">账本</van-tabbar-item>
             <van-tabbar-item  replace to="/user" icon="user-circle-o">我的</van-tabbar-item>
         </van-tabbar>
-
-
     </div>
 </template>
 
