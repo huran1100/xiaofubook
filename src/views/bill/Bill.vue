@@ -58,7 +58,8 @@
                 loading: false,
                 finished: false,
 
-                dataList:[]
+                dataList:[],
+                pageNum:1
             }
         },
         filters: {
@@ -104,26 +105,37 @@
                 this.show = true;
             },
             getList(){
-                getBillList(this.$store.state.currentUser.currentAccountId,this.showDate,10).then(res=>{
+                getBillList(this.$store.state.currentUser.currentAccountId,this.showDate,this.pageNum,6).then(res=>{
                     //console.log(res.data.data)
 
                     if(res.data.status == 1){
+
                         this.dataList = []
-                    }else{
-                        this.dataList = res.data.data.list
+
+                        this.finished = true;
+
+                    }else if(res.data.status == 0){
+                        // 加载状态结束
+                        this.loading = false;
+                        this.dataList = this.dataList.concat(res.data.data.list)
+
+                        if(res.data.data.isLastPage == true){
+                            this.finished = true
+                        }
                     }
 
 
 
-                    if(res.data.data.isLastPage == true){
-                        this.finished = true
-                    }
+
                 })
             },
             onLoad() {
                 //this.showDate = formatTimeToStr(new Date(), "yyyy-MM");
                 this.getList()
+                this.pageNum+=1
 
+                /*console.log('来一次')
+                console.log(this.pageNum)*/
             },
             setDate(value){
                 console.log(value)

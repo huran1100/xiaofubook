@@ -16,7 +16,8 @@
         </van-cell-group>
 
         <!--图片上传-->
-        <van-uploader :after-read="afterRead" />
+        <!--<van-uploader :after-read="afterRead" />-->
+        <van-uploader v-model="fileList" :after-read="afterRead" multiple :max-count="1"/>
 
         <span @click="showPopup">
             <van-icon class="booking-date" name="calender-o" size="2rem"/>
@@ -64,18 +65,16 @@
         >
             <van-picker :columns="columns" show-toolbar @cancel="onCancel"
                         @confirm="onConfirm"  />
-
-
         </van-popup>
+
 
     </div>
 </template>
 
 <script>
     import Categories from 'views/booking/Categories'
-    import {getCompanion,booking,upload} from "network/booking";
+    import {getCompanion,booking,upload,upLoadImage} from "network/booking";
     import {formatTimeToStr} from "common/date"
-
 
     export default {
         name: "",
@@ -101,6 +100,8 @@
                 minDate: new Date(2020, 0, 1),
                 maxDate: new Date(2025, 10, 1),
                 currentDate: new Date(),
+                fileList:[]
+
             }
         },
         components:{
@@ -142,9 +143,12 @@
             },
             afterRead(file) {
                 // 此时可以自行将文件上传至服务器
-                console.log(file);
-                upload(file).then(res => {
-                    this.$toast(res.data.msg)
+                let formData = new FormData();
+                // upload这个名字是后台给的
+                formData.append("file", file.file);
+                upLoadImage(formData).then(res => {
+                    //console.log(res.data.data)
+                    this.picture = res.data.data
                 })
 
             },
@@ -158,6 +162,7 @@
             onClose() {
                 let userId = this.$store.state.currentUser.id
                 let accountId = this.$store.state.currentUser.currentAccountId
+                console.log(this.picture,'++====')
                 booking(this.spendTime,userId,this.spendUser.id,accountId,
                     this.type,this.cateogryId,this.money,this.picture,this.remark).then(res => {
                         if(res.data.status == 0){
@@ -177,7 +182,8 @@
             onCancel() {
                 this.$toast('取消');
                 this.userShow=false
-            }
+            },
+
         },
         mounted:function () {
             getCompanion(this.$store.state.currentUser.currentAccountId).then(

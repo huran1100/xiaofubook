@@ -27,7 +27,7 @@ export function booking( spendTime,  userId,  spendUserId,accountId,
         url: 'booking/booking',
         params:{
             spendTime,  userId,  spendUserId,accountId,
-            type,  cateogryId,  money,  remark
+            type,  cateogryId,  money, picture, remark
         }
     })
     
@@ -37,10 +37,23 @@ export function upload(file) {
     return axios({
         url: 'booking/upload.do',
         method:'post',
-        params:{
-            file
-        }
+        headers:{
+            "Content-Type": "multipart/form-data"
+        },
+        data:file
 
     })
 
 }
+export function upLoadImage(file) {
+    return axios({
+        url: 'booking/image.do',
+        method: 'post',
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
+        data: file
+
+    })
+}
+

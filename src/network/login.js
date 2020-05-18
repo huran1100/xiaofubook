@@ -24,3 +24,14 @@ export function userRegister(nickname,username, password,email) {
 
 
 }
+export function loginOut() {
+    return axios({
+        url:'/user/logout.do',
+        method:'post',
+        params:{
+
+        }
+
+    })
+
+}

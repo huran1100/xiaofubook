@@ -34,11 +34,14 @@
             <van-cell icon="gold-coin-o" title="关于哦我们" is-link />
             <van-cell icon="gift-o" title="我收到的礼物" is-link />
         </van-cell-group>
+        <van-button plain type="info" @click="loginOut()">退出登录</van-button>
     </div>
 </template>
 
 <script>
     import {Row, Col} from 'vant';
+    import {loginOut} from "../../network/login";
+
     export default {
         name: "",
         components:{
@@ -48,7 +51,17 @@
         methods:{
             jump() {
                 this.$router.push('/addAccount')
+            },
+            loginOut(){
+                loginOut().then(res =>{
+                    window.sessionStorage.clear()
+                    this.$toast('退出成功')
+                    this.$router.push('/login')
+                })
+
+
             }
+
         }
     }
 </script>
