@@ -9,6 +9,8 @@ const UserLogin = () => import('../views/login/UserLogin')
 const AccountBook = () => import('../views/accountbook/AccountBook')
 const AddAccount = () => import('../views/accountbook/AddAccount')
 const Home = () => import('../views/Home')
+const BillInfo = () => import('../views/bill/BillInfo')
+const Sort = () => import('../views/user/Sort')
 
 
 Vue.use(VueRouter)
@@ -60,8 +62,17 @@ const routes = [
         path: '/addAccount',
         name: 'addAccount',
         component:AddAccount
-      }
-
+      },
+      {
+          path: '/billInfo/:billId',
+          name: 'billInfo',
+          component:BillInfo
+      },
+        {
+            path: '/sort',
+            name: 'sort',
+            component: Sort
+        }
     ]
 
   }
@@ -91,7 +102,7 @@ router.beforeEach((to, from, next) => {
     next()
   }*/
  if(to.path=='/login') return next()
-  const  tokenStr = window.sessionStorage.getItem('token')
+    const  tokenStr = window.sessionStorage.getItem('token')
   if(!tokenStr) return next('/login')
   next()
 

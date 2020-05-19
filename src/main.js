@@ -5,7 +5,7 @@ import store from './store'
 
 
 import { Button,NavBar,Icon,Toast,Field,CellGroup,NumberKeyboard,Uploader,Cell,DatetimePicker,
-    Popup,Image,Picker,List } from 'vant';
+    Popup,Image,Picker,List,Dialog } from 'vant';
 
 
 Vue.use(Button);
@@ -22,6 +22,7 @@ Vue.use(Popup);
 Vue.use(Image);
 Vue.use(Picker);
 Vue.use(List);
+Vue.use(Dialog);
 
 
 

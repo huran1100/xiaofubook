@@ -1,10 +1,10 @@
 import axios from "./axios";
 
-export function getCategory(userId) {
+export function getCategory() {
     return axios({
         url:'booking/getCategory',
         params:{
-            userId
+
         }
     })
 
@@ -55,5 +55,25 @@ export function upLoadImage(file) {
         data: file
 
     })
+}
+
+export function addCategory(name) {
+    return axios({
+        url:'booking/addCategory',
+        params:{
+            name
+        }
+    })
+
+}
+
+export function delCategory(categoryId) {
+    return axios({
+        url:'booking/delCategory',
+        params:{
+            categoryId
+        }
+    })
+
 }
 

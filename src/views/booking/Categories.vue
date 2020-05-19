@@ -24,7 +24,7 @@
             }
         },
         mounted:function () {
-            getCategory(this.$store.state.currentUser.id).then(res =>{
+            getCategory().then(res =>{
                 this.category = res.data.data
             })
         },

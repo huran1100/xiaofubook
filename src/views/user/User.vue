@@ -16,7 +16,7 @@
                 <van-icon name="pending-payment" />
                 <div>添加账本</div>
             </div>
-            <div class="links-item">
+            <div class="links-item" @click="toSort()">
                 <van-icon name="records" />
                 <div>分类管理</div>
             </div>
@@ -51,6 +51,9 @@
         methods:{
             jump() {
                 this.$router.push('/addAccount')
+            },
+            toSort(){
+                this.$router.push('/sort')
             },
             loginOut(){
                 loginOut().then(res =>{

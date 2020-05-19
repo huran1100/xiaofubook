@@ -13,3 +13,13 @@ export function getBillList(accountId,spendTime,currPageNo,pageSize) {
     })
 
 }
+
+export function getBillInfo(billId) {
+    return axios({
+        url: 'booking/getBillInfo.do',
+        params:{
+            billId
+        }
+    })
+
+}

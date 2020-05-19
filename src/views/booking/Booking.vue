@@ -88,7 +88,7 @@
                     id: this.$store.state.currentUser.id,
                     name:this.$store.state.currentUser.nikename
                 },
-                type:1,
+                type:0,
                 cateogryId:1,
                 picture:'',
                 columns: [{text:'小福',id:1},{text:'顾明',id:2}],
@@ -123,12 +123,14 @@
                 this.popShow = false
             },
             income(inc){
-                if(inc == 0){
+                if(inc == 1){
                     this.plain = true
                 }else{
                     this.plain = false
                 }
                 this.type = inc
+
+                console.log(this.type)
 
             },
             getCategory(value) {
@@ -160,9 +162,10 @@
             },
 
             onClose() {
+                if(this.money == '') return this.$toast('请输入金额')
                 let userId = this.$store.state.currentUser.id
                 let accountId = this.$store.state.currentUser.currentAccountId
-                console.log(this.picture,'++====')
+                console.log(this.type,'tupe++====')
                 booking(this.spendTime,userId,this.spendUser.id,accountId,
                     this.type,this.cateogryId,this.money,this.picture,this.remark).then(res => {
                         if(res.data.status == 0){

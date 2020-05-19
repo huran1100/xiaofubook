@@ -43,6 +43,7 @@
 <script>
     import {getAccount,getUserAccount,changeAccount} from "network/account";
     import {formatTimeToStr,formattingDate} from 'common/date'
+    import moment from 'moment/moment'
 
     export default {
         name: "",
@@ -72,8 +73,8 @@
             },
             iosForDate(time) {
                 if(time != null && time!=''){
-                    let date = new Date(time);
-                    return formattingDate(date)
+                    let transTime = moment(time).format('YYYY/MM/DD')
+                    return transTime
                 }else{
                     return ''
                 }

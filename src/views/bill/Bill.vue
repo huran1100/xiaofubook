@@ -1,7 +1,7 @@
 <template>
     <div>
-        <van-nav-bar title="账单" >
-            <van-icon @click="toBooking" name="add-o" slot="right" size="30px"/>
+        <van-nav-bar title="账单" right-text="记账" @click-right="toBooking">
+            <!--<van-icon @click="toBooking" name="add-o" slot="right" size="30px"/>-->
         </van-nav-bar>
 
         <van-cell title="日期" :value="showDate" is-link arrow-direction="down"  @click="showPopup"></van-cell>
@@ -30,13 +30,14 @@
                 @load="onLoad"
         >
         <div v-for="item in dataList">
-            <span>{{item.day|formatDate}}</span>
+            <span>{{item.day|iosForDate}}</span>
 
             <van-cell v-for="info in item.billList"
                       :icon="info.icon"  center
                       :title="info.name"
                       :value="'￥'+info.money"
-                      :label="info.remark" />
+                      :label="info.remark"
+                        @click ="toInfo(info.id)"/>
         </div>
         </van-list>
 
@@ -46,6 +47,8 @@
 <script>
     import {getBillList} from 'network/bill'
     import {formatTimeToStr} from 'common/date'
+    import moment from 'moment/moment'
+
     export default {
         name: "",
         data() {
@@ -78,6 +81,19 @@
 
                 return time.replace(/\-/g, "/");
 
+            },
+            iosForDate(time) {
+                if(time != null && time!=''){
+                    //let date = new Date(time);
+                    //return formattingDate(date)
+                    let transTime = moment(time).format('YYYY/MM/DD')
+                    console.log(transTime)
+                    return transTime
+                }else{
+                    return ''
+                }
+
+
             }
         },
         methods:{
@@ -90,7 +106,15 @@
                 return val;
             },
             toBooking() {
-                this.$router.replace('/booking')
+                let currentAccountId = this.$store.state.currentUser.currentAccountId
+                console.log(currentAccountId,'currentAccountId')
+                if(currentAccountId == 0 || currentAccountId == null){
+                    this.$toast('请添加一个账本')
+                    this.$router.replace('/addAccount')
+                }else{
+                    this.$router.replace('/booking')
+                }
+
             },
             dateFor(time){
                 if(time!=null&&time!="")
@@ -117,15 +141,13 @@
                     }else if(res.data.status == 0){
                         // 加载状态结束
                         this.loading = false;
-                        this.dataList = this.dataList.concat(res.data.data.list)
+                        //this.dataList = this.dataList.concat(res.data.data.list)
+                        this.dataList.push(...res.data.data.list)
 
                         if(res.data.data.isLastPage == true){
                             this.finished = true
                         }
                     }
-
-
-
 
                 })
             },
@@ -138,15 +160,21 @@
                 console.log(this.pageNum)*/
             },
             setDate(value){
-                console.log(value)
                 this.showDate = formatTimeToStr(value,'yyyy-MM')
                 this.show = false
-                this.getList()
+                this.pageNum = 1
+                this.dataList = []
+                this.loading = true
+                this.finished = false
+                this.onLoad()
 
             },
             dateCancel() {
                 this.show = false;
 
+            },
+            toInfo(billId){
+                this.$router.push('/billInfo/'+billId)
             }
         }
 
